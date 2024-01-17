@@ -662,6 +662,9 @@ Install-Docker()
         $daemonSettings | Add-Member NoteProperty fixed-cidr $NATSubnet
     }
 
+    # fix Google Cloud MTU VPC size
+    $daemonSettings | Add-Member NoteProperty mtu 1450
+    
     $daemonSettingsFile = Join-Path $dockerConfigPath "daemon.json"
 
     $daemonSettings | ConvertTo-Json | Out-File -FilePath $daemonSettingsFile -Encoding ASCII
